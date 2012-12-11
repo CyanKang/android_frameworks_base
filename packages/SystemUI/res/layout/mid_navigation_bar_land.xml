@@ -30,6 +30,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
         <com.android.systemui.statusbar.policy.KeyButtonView
+            android:id="@+id/dpad_left"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_weight="0"
+            android:scaleType="fitCenter"
+            systemui:keyRepeat="true"/>
+        <com.android.systemui.statusbar.policy.KeyButtonView
             android:id="@+id/ime_switcher"
             android:layout_width="match_parent"
             android:layout_height="40dp"
@@ -101,4 +109,12 @@
         android:layout_width="match_parent"
         android:layout_weight="0"
         systemui:keyRepeat="true" />
+    <com.android.systemui.statusbar.policy.KeyButtonView
+        android:id="@+id/dpad_right"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_weight="0"
+        android:scaleType="fitCenter"
+        systemui:keyRepeat="true"/>
 </LinearLayout>
