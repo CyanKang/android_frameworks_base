@@ -93,6 +93,11 @@ public class LocationTile extends QSTile<QSTile.BooleanState> {
     }
 
     @Override
+    protected void handleSecondaryClick() {
+        mHost.startSettingsActivity(LOCATION_SETTINGS);
+    }
+
+    @Override
     protected void handleLongClick() {
         mHost.startSettingsActivity(LOCATION_SETTINGS_INTENT);
     }
