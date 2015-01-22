@@ -107,4 +107,7 @@
     <string name="navbar_menu_always_button">Menu (alwaysShow) button</string>
     <string name="navbar_menu_big_button">Menu button</string>
 
+    <string name="left_shortcut_hint">Swipe right for %1$s</string>
+    <string name="right_shortcut_hint">Swipe left for %1$s</string>
+
 </resources>
