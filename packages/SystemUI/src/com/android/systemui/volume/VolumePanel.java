@@ -782,12 +782,12 @@ public class VolumePanel extends Handler {
         }
     }
 
-    private void hideVolumePanel() {
+    public void hideVolumePanel() {
         diappearVolumePanel();
         mStreamControls.get(mActiveStreamType).expandPanel.setVisibility(View.VISIBLE);
     }
 
-    private void expandVolumePanel() {
+    public void expandVolumePanel() {
         showVolumePanel();
         mStreamControls.get(mActiveStreamType).expandPanel.setVisibility(View.GONE);
     }
