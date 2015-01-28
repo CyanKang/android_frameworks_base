@@ -55,9 +55,16 @@ public class LteTile extends QSTile<QSTile.BooleanState> {
 
     @Override
     protected void handleUpdateState(BooleanState state, Object arg) {
-        if (!QSUtils.deviceSupportsLte(mContext)) {
+        // Hide the tile if device doesn't support LTE
+        // or it supports Dual Sim Dual Active.
+        // TODO: Should be spawning off a tile per sim
+        if (!QSUtils.deviceSupportsLte(mContext)
+                || QSUtils.deviceSupportsDdsSupported(mContext)) {
             state.visible = false;
+            return;
         }
+
+        state.label = mContext.getString(R.string.quick_settings_lte_tile_title);
 
         switch (getCurrentPreferredNetworkMode()) {
             case Phone.NT_MODE_GLOBAL:
@@ -70,12 +77,10 @@ public class LteTile extends QSTile<QSTile.BooleanState> {
             case Phone.NT_MODE_TD_SCDMA_WCDMA_LTE:
                 state.visible = true;
                 state.iconId = R.drawable.ic_qs_lte_on;
-                state.label = mContext.getString(R.string.quick_settings_lte);
                 break;
             default:
                 state.visible = true;
                 state.iconId = R.drawable.ic_qs_lte_off;
-                state.label = mContext.getString(R.string.quick_settings_lte_off);
                 break;
         }
     }
