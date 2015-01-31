@@ -718,7 +718,6 @@ public class NavigationBarView extends LinearLayout {
         pw.println();
     }
 
-<<<<<<< HEAD
     public interface OnVerticalChangedListener {
         void onVerticalChanged(boolean isVertical);
     }
@@ -845,6 +844,4 @@ public class NavigationBarView extends LinearLayout {
             setNavigationIconHints(mNavigationIconHints, true);
         }
     }
-=======
->>>>>>> 24814d7... Add back navigation ring customization.
 }

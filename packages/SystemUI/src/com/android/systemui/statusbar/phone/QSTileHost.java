@@ -328,8 +328,6 @@ public class QSTileHost implements QSTile.Host {
                 return new ScreenTimeoutTile(this);
             case QSConstants.TILE_VISUALIZER:
                 return new VisualizerTile(this);
-            case QSConstants.TILE_SCREEN_TIMEOUT:
-                return new ScreenTimeoutTile(this);
             default:
                 throw new IllegalArgumentException("Bad tile spec: " + tileSpec);
         }
