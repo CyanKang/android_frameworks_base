@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2012 The CyanogenMod Project
+ * Copyright (C) 2015 The CyanogenMod Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -66,6 +66,7 @@ public class NavbarEditor implements View.OnTouchListener {
 
     // holds the button views in the order they currently appear on screen
     private final ArrayList<KeyButtonView> mButtonViews;
+    private final boolean mRtl;
 
     private Context mContext;
     private static Boolean sIsDevicePhone = null;
@@ -148,10 +149,11 @@ public class NavbarEditor implements View.OnTouchListener {
 
     private static final String DEFAULT_SETTING_STRING = "empty|back|home|recent|empty|menu0";
 
-    public NavbarEditor (View parent, boolean orientation) {
+    public NavbarEditor (View parent, boolean orientation, boolean isRtl) {
         mContext = parent.getContext();
         mParent = parent;
         mVertical = orientation;
+        mRtl = isRtl;
 
         mButtonViews = new ArrayList<KeyButtonView>();
 
@@ -341,7 +343,7 @@ public class NavbarEditor implements View.OnTouchListener {
     protected void saveKeys() {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < BUTTON_IDS.length; i++) {
-            int idIndex = mVertical ? BUTTON_IDS.length - i : i;
+            int idIndex = mVertical && !mRtl ? BUTTON_IDS.length - (i + 1) : i;
             ButtonInfo info = (ButtonInfo) mButtonViews.get(idIndex).getTag();
             if (i != 0) sb.append("|");
             sb.append(info.key);
@@ -370,7 +372,7 @@ public class NavbarEditor implements View.OnTouchListener {
 
         for (int i = 0; i < BUTTON_IDS.length; i++) {
             int id = BUTTON_IDS[i];
-            int index = mVertical ? BUTTON_IDS.length - i - 1 : i;
+            int index = mVertical && !mRtl ? BUTTON_IDS.length - i - 1 : i;
             String key = index < buttons.length ? buttons[index] : null;
             KeyButtonView buttonView = (KeyButtonView) mParent.findViewById(id);
             boolean isSmallButton = ArrayUtils.contains(SMALL_BUTTON_IDS, id);
