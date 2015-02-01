@@ -317,7 +317,7 @@ public class WallpaperManagerService extends IWallpaperManager.Stub {
                     Slog.w(TAG, "Wallpaper service gone: " + mWallpaper.wallpaperComponent);
                     if (!mWallpaper.wallpaperUpdating
                             && mWallpaper.userId == mCurrentUserId) {
-                        if (mWallpaper.wallpaperComponent.equals(IMAGE_WALLPAPER)) {
+                        if (mWallpaper.wallpaperComponent.equals(mImageWallpaper)) {
                             Slog.w(TAG, "SystemUI wallpaper disconnected, assuming it's being restarted, not clearing wallpaper.");
                             return;
                         }
