@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013-2014 The CyanogenMod Project
+ * Copyright (C) 2015 The CyanogenMod Project
  * Copyright (C) 2013 AOKP by Mike Wilson - Zaphod-Beeblebrox && Steve Spear - Stevespear426
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -28,6 +28,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.content.pm.ResolveInfo;
+import android.hardware.TorchManager;
 import android.hardware.input.InputManager;
 import android.media.AudioManager;
 import android.media.ToneGenerator;
@@ -50,9 +51,7 @@ import android.view.WindowManagerGlobal;
 import android.widget.Toast;
 
 import com.android.internal.statusbar.IStatusBarService;
-import com.android.internal.util.cm.TorchConstants;
-import static com.android.internal.util.cm.NavigationRingConstants.*;
-import com.android.systemui.R;
+import static com.android.systemui.cm.NavigationRingConstants.*;
 import com.android.systemui.screenshot.TakeScreenshotService;
 import com.android.systemui.statusbar.phone.KeyguardTouchDelegate;
 
@@ -115,30 +114,7 @@ public class ActionTarget {
             takeScreenshot();
             return true;
         } else if (action.equals(ACTION_ASSIST)) {
-            boolean isKeyguardShowing = mKeyguardManager.isKeyguardLocked();
-            if (isKeyguardShowing) {
-                // Have keyguard show the bouncer and launch the activity if the user succeeds.
-                KeyguardTouchDelegate.getInstance(mContext).showAssistant();
-                return false;
-            }
-
-            // Otherwise, keyguard isn't showing so launch it from here.
-            SearchManager searchManager = ((SearchManager) mContext
-                    .getSystemService(Context.SEARCH_SERVICE));
-            Intent intent = searchManager.getAssistIntent(mContext, true, UserHandle.USER_CURRENT);
-            if (intent == null) {
-                return false;
-            }
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            try {
-                dismissKeyguard();
-                mContext.startActivityAsUser(intent, opts, UserHandle.CURRENT);
-            } catch (ActivityNotFoundException e) {
-                Log.w(TAG, "Activity not found for " + intent.getAction());
-                return false;
-            }
-
-            return true;
+            return false;
         } else if (action.equals(ACTION_KILL_TASK)) {
             mHandler.post(mKillRunnable);
             return true;
@@ -178,8 +154,8 @@ public class ActionTarget {
 
             return true;
         } else if (action.equals(ACTION_TORCH)) {
-            Intent intent = new Intent(TorchConstants.ACTION_TOGGLE_STATE);
-            mContext.sendBroadcast(intent);
+            TorchManager torchManager = (TorchManager) mContext.getSystemService(Context.TORCH_SERVICE);
+            torchManager.toggleTorch();
             return true;
         } else {
             try {
