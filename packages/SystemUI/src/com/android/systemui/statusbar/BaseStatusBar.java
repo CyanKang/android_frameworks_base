@@ -1030,6 +1030,8 @@ public abstract class BaseStatusBar extends SystemUI implements
         mSearchPanelView.setOnTouchListener(
                  new TouchOutsideListener(MSG_CLOSE_SEARCH_PANEL, mSearchPanelView));
         mSearchPanelView.setVisibility(View.GONE);
+        boolean vertical = mNavigationBarView != null && mNavigationBarView.isVertical();
+        mSearchPanelView.setHorizontal(vertical);
 
         WindowManager.LayoutParams lp = getSearchLayoutParams(mSearchPanelView.getLayoutParams());
 

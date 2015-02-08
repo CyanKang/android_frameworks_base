@@ -17,4 +17,14 @@
  */
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+
+    <!-- QuickSettings: LteTile -->
+    <string name="quick_settings_lte">On</string>
+    <string name="quick_settings_lte_off">Off</string>
+    <string name="quick_settings_lte_tile_title">LTE</string>
+
+    <!-- QuickSettings: ADB_over_Network_Tile -->
+    <string name="quick_settings_network_adb_enabled_label">Enabled</string>
+    <string name="quick_settings_network_adb_disabled_label">Disabled</string>
+
 </resources>

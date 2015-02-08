@@ -179,8 +179,6 @@ public class NotificationsTile extends QSTile<NotificationsTile.NotificationsSta
             v.addOnAttachStateChangeListener(new OnAttachStateChangeListener() {
                 @Override
                 public void onViewDetachedFromWindow(View v) {
-                    vp.postDismiss(0);
-                    vp.updateStates();
                     volumeComponent.setVolumePanel(null);
                 }
 

@@ -797,7 +797,7 @@ public class VolumePanel extends Handler {
         }
     }
 
-    public void hideVolumePanel() {
+    private void hideVolumePanel() {
         diappearVolumePanel();
         StreamControl sc = mStreamControls.get(mActiveStreamType);
         if (sc != null) {
@@ -805,7 +805,7 @@ public class VolumePanel extends Handler {
         }
     }
 
-    public void expandVolumePanel() {
+    private void expandVolumePanel() {
         showVolumePanel();
         StreamControl sc = mStreamControls.get(mActiveStreamType);
         if (sc != null) {

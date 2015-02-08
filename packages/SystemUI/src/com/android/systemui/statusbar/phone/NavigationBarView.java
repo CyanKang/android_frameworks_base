@@ -113,6 +113,7 @@ public class NavigationBarView extends LinearLayout {
 
     private Resources mThemedResources;
 
+    private OnVerticalChangedListener mOnVerticalChangedListener;
     private boolean mIsLayoutRtl;
     private boolean mDelegateIntercepted;
 
@@ -242,6 +243,11 @@ public class NavigationBarView extends LinearLayout {
     public void setBar(BaseStatusBar phoneStatusBar) {
         mTaskSwitchHelper.setBar(phoneStatusBar);
         mDelegateHelper.setBar(phoneStatusBar);
+    }
+
+    public void setOnVerticalChangedListener(OnVerticalChangedListener onVerticalChangedListener) {
+        mOnVerticalChangedListener = onVerticalChangedListener;
+        notifyVerticalChangedListener(mVertical);
     }
 
     @Override
@@ -591,10 +597,17 @@ public class NavigationBarView extends LinearLayout {
             mVertical = newVertical;
             //Log.v(TAG, String.format("onSizeChanged: h=%d, w=%d, vert=%s", h, w, mVertical?"y":"n"));
             reorient();
+            notifyVerticalChangedListener(newVertical);
         }
 
         postCheckForInvalidLayout("sizeChanged");
         super.onSizeChanged(w, h, oldw, oldh);
+    }
+
+    private void notifyVerticalChangedListener(boolean newVertical) {
+        if (mOnVerticalChangedListener != null) {
+            mOnVerticalChangedListener.onVerticalChanged(newVertical);
+        }
     }
 
     @Override
