@@ -745,9 +745,6 @@ public class NotificationManagerService extends SystemService {
             boolean packageChanged = false;
             boolean cancelNotifications = true;
 
-            boolean ScreenOnNotificationLed = Settings.System.getInt(mContext.getContentResolver(),
-                    Settings.System.SCREEN_ON_NOTIFICATION_LED, 1) == 1;
-
             if (action.equals(Intent.ACTION_PACKAGE_ADDED)
                     || (queryRemove=action.equals(Intent.ACTION_PACKAGE_REMOVED))
                     || action.equals(Intent.ACTION_PACKAGE_RESTARTED)
@@ -815,6 +812,9 @@ public class NotificationManagerService extends SystemService {
         @Override
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
+
+            boolean ScreenOnNotificationLed = Settings.System.getInt(mContext.getContentResolver(),
+                    Settings.System.SCREEN_ON_NOTIFICATION_LED, 1) == 1;
 
             if (action.equals(Intent.ACTION_SCREEN_ON)) {
                 // Keep track of screen on/off state, but do not turn off the notification light
