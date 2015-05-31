@@ -717,6 +717,7 @@ public class VolumePanel extends Handler implements DemoMode {
                         public void onClick(View v) {
                             resetTimeout();
                             toggleRinger(sc);
+                            updateStates();
                         }
                     });
                 }
@@ -1008,9 +1009,9 @@ public class VolumePanel extends Handler implements DemoMode {
     private void updateTimeoutDelay() {
         mTimeoutDelay = mDemoIcon != 0 ? TIMEOUT_DELAY_EXPANDED
                 : sSafetyWarning != null ? TIMEOUT_DELAY_SAFETY_WARNING
-                : mActiveStreamType == AudioManager.STREAM_MUSIC ? TIMEOUT_DELAY_SHORT
                 : mZenPanelExpanded ? TIMEOUT_DELAY_EXPANDED
                 : isZenPanelVisible() ? TIMEOUT_DELAY_COLLAPSED
+                : mActiveStreamType == AudioManager.STREAM_MUSIC ? TIMEOUT_DELAY_SHORT
                 : TIMEOUT_DELAY;
     }
 
@@ -1593,7 +1594,11 @@ public class VolumePanel extends Handler implements DemoMode {
             case MSG_INTERNAL_RINGER_MODE_CHANGED:
             case MSG_NOTIFICATION_EFFECTS_SUPPRESSOR_CHANGED: {
                 if (isShowing()) {
-                    updateActiveSlider();
+                    if (mExtendedPanelExpanded) {
+                        updateStates();
+                    } else {
+                        updateActiveSlider();
+                    }
                 }
                 break;
             }
@@ -1678,6 +1683,7 @@ public class VolumePanel extends Handler implements DemoMode {
                 StreamControl sc = (StreamControl) tag;
                 setStreamVolume(sc, progress,
                         AudioManager.FLAG_SHOW_UI | AudioManager.FLAG_VIBRATE);
+                updateStates();
             }
             resetTimeout();
         }
