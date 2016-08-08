@@ -4796,6 +4796,13 @@ public final class Settings {
                 "recent_app_sidebar_open_simultaneously";
 
         /**
+         * NFC polling mode configuration key
+         *
+         * @hide
+         */
+        public static final String NFC_POLLING_MODE = "nfc_polling_mode";
+
+        /**
          * Enable/Disable screenshot sound
          * @hide
          */
