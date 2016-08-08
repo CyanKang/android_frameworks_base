@@ -4746,6 +4746,12 @@ public final class Settings {
         public static final String RECENT_CARD_TEXT_COLOR = "recent_card_text_color";
 
         /**
+         * Whether to use slim recent app sidebar
+         * @hide
+         */
+        public static final String USE_RECENT_APP_SIDEBAR = "use_recent_app_sidebar";
+
+        /**
          * Recent app sidebar content
          *
          * @hide
@@ -4779,6 +4785,15 @@ public final class Settings {
          * @hide
          */
         public static final String RECENT_APP_SIDEBAR_SCALE_FACTOR = "recent_app_sidebar_scale_factor";
+
+        /**
+         * Whether the app sidebar should open simultaneously with recents
+         * Alternative: recents are allowed to open before the app sidebar finished inflating
+         *
+         * @hide
+         */
+        public static final String RECENT_APP_SIDEBAR_OPEN_SIMULTANEOUSLY =
+                "recent_app_sidebar_open_simultaneously";
 
         /**
          * Enable/Disable screenshot sound
@@ -6288,6 +6303,15 @@ public final class Settings {
          */
         @Deprecated
         public static final String LOCK_PATTERN_VISIBLE = "lock_pattern_visible_pattern";
+
+        /**
+         * Disable checking for running overlays during permission changes
+         * running OmniSwitch will trigger this and we want to give people
+         * possibility to make it easier on demand
+         *
+         * @hide
+         */
+        public static final String PACKAGE_INSTALL_OVERLAY_CHECK_DISABLED = "package_install_overlay_check_disabled";
 
         /**
          * Whether lock pattern will vibrate as user enters (0 = false, 1 =
