@@ -100,6 +100,7 @@ public class StatusBarWindowView extends FrameLayout implements TunerService.Tun
 
     private boolean mDoubleTapToSleepEnabled;
     private GestureDetector mDoubleTapGesture;
+    private GestureDetector mDozeWakeupDoubleTapGesture;
 
     public StatusBarWindowView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -215,6 +216,13 @@ public class StatusBarWindowView extends FrameLayout implements TunerService.Tun
                 return true;
             }
         });
+        mDozeWakeupDoubleTapGesture = new GestureDetector(mContext, new GestureDetector.SimpleOnGestureListener() {
+            @Override
+            public boolean onDoubleTap(MotionEvent e) {
+                mService.wakeUpIfDozing(e.getEventTime(), e);
+                return true;
+            }
+        });
 
         // We need to ensure that our window doesn't suffer from overdraw which would normally
         // occur if our window is translucent. Since we are drawing the whole window anyway with
@@ -302,11 +310,11 @@ public class StatusBarWindowView extends FrameLayout implements TunerService.Tun
                 && mStackScrollLayout.getVisibility() == View.VISIBLE
                 && mService.getBarState() == StatusBarState.KEYGUARD
                 && !mService.isBouncerShowing()) {
-            intercept = mDragDownHelper.onInterceptTouchEvent(ev);
-            // wake up on a touch down event, if dozing
-            if (ev.getActionMasked() == MotionEvent.ACTION_DOWN) {
-                mService.wakeUpIfDozing(ev.getEventTime(), ev);
+            if (!mService.isDozing()) {
+                intercept = mDragDownHelper.onInterceptTouchEvent(ev);
             }
+            // wake up on a touch down event, if dozing
+            mDozeWakeupDoubleTapGesture.onTouchEvent(ev);
         }
         if (!intercept) {
             super.onInterceptTouchEvent(ev);
