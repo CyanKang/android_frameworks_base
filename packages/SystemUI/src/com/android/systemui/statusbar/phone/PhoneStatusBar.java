@@ -572,8 +572,6 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
         }
     };
 
-    private SettingsObserver mObserver = new SettingsObserver(mHandler);
-
     private int mInteractingWindows;
     private boolean mAutohideSuspended;
     private int mStatusBarMode;
@@ -816,8 +814,6 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
                 SCREEN_BRIGHTNESS_MODE,
                 NAVBAR_LEFT_IN_LANDSCAPE,
                 STATUS_BAR_BRIGHTNESS_CONTROL);
-
-        mObserver.observe();
 
         // Lastly, call to the icon policy to install/update all the icons.
         mIconPolicy = new PhoneStatusBarPolicy(mContext, mIconController, mCastController,
