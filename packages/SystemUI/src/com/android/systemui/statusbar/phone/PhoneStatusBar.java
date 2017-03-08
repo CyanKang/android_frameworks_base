@@ -157,6 +157,7 @@ import com.android.systemui.settings.BrightnessController;
 import com.android.systemui.settings.CurrentUserTracker;
 import com.android.systemui.slimrecent.RecentController;
 import com.android.systemui.slimrecent.SlimScreenPinningRequest;
+import com.android.systemui.slimrecent.UserContentObserver;
 import com.android.systemui.stackdivider.Divider;
 import com.android.systemui.stackdivider.WindowManagerProxy;
 import com.android.systemui.statusbar.ActivatableNotificationView;
